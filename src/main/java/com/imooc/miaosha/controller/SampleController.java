@@ -1,10 +1,8 @@
 package com.imooc.miaosha.controller;
 
-import com.imooc.miaosha.redis.RedisService;
 import com.imooc.miaosha.service.AnalysisService;
 import com.imooc.miaosha.vo.CommandsVo;
 import com.imooc.miaosha.vo.CommandsVoString;
-import com.imooc.miaosha.vo.LoginVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +26,6 @@ public class SampleController {
     @Autowired
     AnalysisService analysisService;
 
-    @Autowired
-    RedisService redisService;
 
     @RequestMapping("/form")
     public String toLogin() {

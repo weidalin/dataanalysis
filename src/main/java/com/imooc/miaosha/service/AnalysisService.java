@@ -1,14 +1,8 @@
 package com.imooc.miaosha.service;
 
-import com.imooc.miaosha.domain.MiaoshaUser;
-import com.imooc.miaosha.redis.MiaoshaUserKey;
-import com.imooc.miaosha.redis.RedisService;
 import com.imooc.miaosha.result.Result;
-import com.imooc.miaosha.util.UUIDUtil;
 import com.imooc.miaosha.vo.CommandsVo;
 import com.imooc.miaosha.vo.CommandsVoString;
-import com.imooc.miaosha.vo.LoginVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
@@ -17,12 +11,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static com.imooc.miaosha.service.MiaoshaUserService.COOKI_NAME_TOKEN;
 
 @Service
 public class AnalysisService {
-    @Autowired
-    RedisService redisService;
 
     public Result<Boolean> analysis(HttpServletResponse response, CommandsVo commandsVo) throws IOException {
         String[] cmds = commandsVo.getCommands();
@@ -41,13 +32,6 @@ public class AnalysisService {
         }
         String result = sb.toString();
         return Result.success(true);
-    }
-    private void addCookie(HttpServletResponse response, String token, String result) {
-        redisService.set(MiaoshaUserKey.token, token, result);
-        Cookie cookie = new Cookie(COOKI_NAME_TOKEN, token);
-        cookie.setMaxAge(MiaoshaUserKey.token.expireSeconds());
-        cookie.setPath("/");
-        response.addCookie(cookie);
     }
 
     public static void main(String[] args) throws IOException {

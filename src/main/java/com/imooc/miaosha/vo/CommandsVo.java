@@ -1,6 +1,5 @@
 package com.imooc.miaosha.vo;
 
-import com.imooc.miaosha.validator.IsMobile;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
